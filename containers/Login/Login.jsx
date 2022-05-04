@@ -9,6 +9,9 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+
     
 
     const onChangeEmail = (text) => {
@@ -28,19 +31,27 @@ const Login = () => {
            console.log('password : ', password);
            setEmail('');
            setPassword('');
+           setEmailError('');
+           setPasswordError('');
        }else{
-           console.log('incorrect values');
+        //    email.includes('@') <=> email.includes('@') === true;
+
+           setEmailError(email.includes('@') ? '' : 'incorrect email');
+           setPasswordError(password.length >= 6 ? '' : 'password incorrect (must be at least 6 characters)');
        }
     }
     return (
+
         <Card header='Please, login here!'>
-            <Input onChangeInput={onChangeEmail}  
+            <Input onChangeInput={onChangeEmail} 
+            errorMsg={emailError} 
             value={email} placeHolder='Email'>
                 <Entypo name='email' size={24} color='royalblue' />
             </Input>
             
 
             <Input onChangeInput={onChangePassword}
+             errorMsg={passwordError} 
              value={password} 
              placeHolder='Password'>
                 <MaterialCommunityIcons name='form-textbox-password' size={24} color='royalblue' />

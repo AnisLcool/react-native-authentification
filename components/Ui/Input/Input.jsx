@@ -1,13 +1,16 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 
-const Input = ({children, placeHolder, value,onChangeInput }) => {
+const Input = ({ children, placeHolder, value, onChangeInput, errorMsg }) => {
     return (
-        <View style={styles.container}>
-            <View>{children}</View>
-            <TextInput onChangeText={onChangeInput} style={styles.input} placeholder={placeHolder}
-            value={value}/>
-        </View>
+        <>
+            <View style={styles.container}>
+                <View>{children}</View>
+                <TextInput onChangeText={onChangeInput} style={styles.input} placeholder={placeHolder}
+                    value={value} />
+            </View>
+            <Text style={{ color: 'red' }}>{errorMsg}</Text>
+        </>
     )
 }
 
