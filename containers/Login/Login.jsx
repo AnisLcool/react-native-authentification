@@ -5,7 +5,7 @@ import Input from '../../components/Ui/Input/Input'
 import Button from '../../components/Ui/Button/Button'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
-const Login = () => {
+const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -27,12 +27,12 @@ const Login = () => {
 
     const loginHandler = () => {
        if(email.includes('@') && password.length >= 6){
-           console.log('email : ', email);
-           console.log('password : ', password);
+           
            setEmail('');
            setPassword('');
            setEmailError('');
            setPasswordError('');
+           props.changePageState();
        }else{
         //    email.includes('@') <=> email.includes('@') === true;
 
