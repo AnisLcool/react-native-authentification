@@ -45,7 +45,8 @@ const Login = (props) => {
         <Card header='Please, login here!'>
             <Input onChangeInput={onChangeEmail} 
             errorMsg={emailError} 
-            value={email} placeHolder='Email'>
+            value={email} placeHolder='Email'
+            >
                 <Entypo name='email' size={24} color='royalblue' />
             </Input>
             
@@ -53,8 +54,10 @@ const Login = (props) => {
             <Input onChangeInput={onChangePassword}
              errorMsg={passwordError} 
              value={password} 
-             placeHolder='Password'>
+             placeHolder='Password'
+             isPassword >
                 <MaterialCommunityIcons name='form-textbox-password' size={24} color='royalblue' />
+                
             </Input>
 
             <Button onPressHandler={loginHandler}>Login</Button>
