@@ -8,11 +8,11 @@ import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 const Login = () => {
     return (
         <Card header='Please, login here!'>
-            <Input>
+            <Input placeHolder='Email'>
                 <Entypo name='email' size={24} color='royalblue' />
             </Input>
 
-            <Input>
+            <Input placeHolder='Password'>
                 <MaterialCommunityIcons name='form-textbox-password' size={24} color='royalblue' />
             </Input>
 
