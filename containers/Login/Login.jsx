@@ -29,8 +29,16 @@ const Login = (props) => {
         }
     }
 
+    const emailValidation = (email) => {
+        return email.toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+
+    }
+
     const loginHandler = () => {
-        if (email.includes('@') && password.length >= 6) {
+        // regex
+        if (emailValidation() && password.length >= 6) {
 
             setEmail('');
             setPassword('');
