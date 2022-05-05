@@ -1,24 +1,28 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import { FontAwesome } from '@expo/vector-icons';
 const Input = ({ children, placeHolder, value, onChangeInput, errorMsg, isPassword }) => {
-    const testFct = () => {
-        console.log('BONJOUR');
-    }
+    const [isPasswordShown, setIsPasswordShown] = useState(false);
+
+  
     return (
+        // isPasswordShown === true ? false : true;  => !isPasswordShown
+        // !true => false, !false => true
         // secureTextEntry = true , false
-        // eye-slash
+        // eye-slash, eye
         <>
             <View style={styles.container}>
                 <View>{children}</View>
 
                 <TextInput onChangeText={onChangeInput} style={styles.input} placeholder={placeHolder}
-                    value={value} />
+                    value={value}
+                    secureTextEntry={isPasswordShown ? false : true} />
 
                 {isPassword ?
 
-                    (<TouchableOpacity onPress={testFct}>
-                        <FontAwesome name='eye' size={24} color='green' />
+                    (<TouchableOpacity onPress={() => setIsPasswordShown(!isPasswordShown)}>
+                        {isPasswordShown ? <FontAwesome name='eye-slash' size={24} color='coral' /> : 
+                        <FontAwesome name='eye' size={24} color='green' />}
                     </TouchableOpacity>) :
 
                         null}
