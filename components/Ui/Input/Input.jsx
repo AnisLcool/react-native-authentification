@@ -16,7 +16,7 @@ const Input = ({ children, placeHolder, value, onChangeInput, errorMsg, isPasswo
 
                 <TextInput onChangeText={onChangeInput} style={styles.input} placeholder={placeHolder}
                     value={value}
-                    secureTextEntry={isPasswordShown ? false : true} />
+                    secureTextEntry={isPassword ? isPasswordShown ? false : true : null} />
 
                 {isPassword ?
 

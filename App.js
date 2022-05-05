@@ -3,23 +3,27 @@ import { useState } from 'react';
 import Header from './components/Header/Header';
 import Login from './containers/Login/Login';
 import Home from './components/Home/Home';
-export default function App() {
-  const [page, setPage] = useState('Login');
+import { UserContext } from './context/userContext';
 
-  const changePageState = () => {
-    setPage('Home');
+export default function App() {
+  const [user, setUser] = useState({ isAuth: false, email: '' })
+
+  const logInHandler = (userEmail) => {
+    setUser({isAuth: true, email: userEmail})
+  };
+
+  const logOutHandler = () => {
+    setUser({isAuth: false, email:''})
   }
-  const logOut = () => {
-    setPage('Login')
-  }
+  
   // 2eme solution 
   let content;
-  if (page === 'Home') {
-    content = <Home logOut={logOut} />
+  if (user.isAuth) {
+    content = <Home  />
   } else {
     content = <>
       <Header />
-      <Login changePageState={changePageState} />
+      <Login />
     </>
   }
   return (
@@ -33,9 +37,14 @@ export default function App() {
     //     </>}
     // </View>
     // 1ere solution
-    <View style={styles.container}>
-      {content}
-    </View>
+    
+      <UserContext.Provider value={{user: user, logIn: logInHandler, logOut: logOutHandler}}>
+        <View style={styles.container}>
+          {content}
+        </View>
+      </UserContext.Provider>
+     
+    
   );
 }
 

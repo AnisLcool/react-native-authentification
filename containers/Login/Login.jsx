@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native'
-import React,{useState} from 'react'
+import React, { useState, useContext } from 'react'
 import Card from '../../components/hoc/Card'
 import Input from '../../components/Ui/Input/Input'
 import Button from '../../components/Ui/Button/Button'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { UserContext } from '../../context/userContext'
 
 const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -12,52 +13,55 @@ const Login = (props) => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    
+    // définir le consumer
+    const userContext = useContext(UserContext)
+
+
 
     const onChangeEmail = (text) => {
         setEmail(text)
     };
 
     const onChangePassword = (text) => {
-        if(!text.includes(' ')){
+        if (!text.includes(' ')) {
             console.log('here');
             setPassword(text)
         }
     }
 
     const loginHandler = () => {
-       if(email.includes('@') && password.length >= 6){
-           
-           setEmail('');
-           setPassword('');
-           setEmailError('');
-           setPasswordError('');
-           props.changePageState();
-       }else{
-        //    email.includes('@') <=> email.includes('@') === true;
+        if (email.includes('@') && password.length >= 6) {
 
-           setEmailError(email.includes('@') ? '' : 'incorrect email');
-           setPasswordError(password.length >= 6 ? '' : 'password incorrect (must be at least 6 characters)');
-       }
+            setEmail('');
+            setPassword('');
+            setEmailError('');
+            setPasswordError('');
+            userContext.logIn(email);
+        } else {
+            //    email.includes('@') <=> email.includes('@') === true;
+
+            setEmailError(email.includes('@') ? '' : 'incorrect email');
+            setPasswordError(password.length >= 6 ? '' : 'password incorrect (must be at least 6 characters)');
+        }
     }
     return (
 
         <Card header='Please, login here!'>
-            <Input onChangeInput={onChangeEmail} 
-            errorMsg={emailError} 
-            value={email} placeHolder='Email'
+            <Input onChangeInput={onChangeEmail}
+                errorMsg={emailError}
+                value={email} placeHolder='Email'
             >
                 <Entypo name='email' size={24} color='royalblue' />
             </Input>
-            
+
 
             <Input onChangeInput={onChangePassword}
-             errorMsg={passwordError} 
-             value={password} 
-             placeHolder='Password'
-             isPassword >
+                errorMsg={passwordError}
+                value={password}
+                placeHolder='Password'
+                isPassword >
                 <MaterialCommunityIcons name='form-textbox-password' size={24} color='royalblue' />
-                
+
             </Input>
 
             <Button onPressHandler={loginHandler}>Login</Button>
