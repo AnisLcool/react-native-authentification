@@ -38,7 +38,7 @@ const Login = (props) => {
 
     const loginHandler = () => {
         // regex
-        if (emailValidation() && password.length >= 6) {
+        if (emailValidation(email) && password.length >= 6) {
 
             setEmail('');
             setPassword('');
